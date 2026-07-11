@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
 
-
 :root {
     --color-primaria: #000000;
     --color-secundaria: #F6F6F6;
@@ -13,64 +12,78 @@
 
 * {
     padding: 0;
-    margin:0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-body{
-    box-sizing: border-box;
+body {
     background-color: var(--color-primaria);
     color: var(--color-secundaria);
 }
 
-.header{
+/* ==========================================================================
+   Header / Navegación
+   ========================================================================== */
+.header {
     padding: 2% 0% 0% 15%;
 }
 
-.header__menu{
+.header__menu {
     display: flex;
     gap: 80px;
 }
-.header__menu__link{
+
+.header__menu__link {
     font-family: var(--fuente-montserrat);
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-terciaria);
     text-decoration: none;
-
+    transition: color 0.3s ease;
 }
 
+.header__menu__link:hover {
+    color: var(--color-secundaria);
+}
 
-
+/* ==========================================================================
+   Sección Principal (Presentación)
+   ========================================================================== */
 .presentacion {
     padding: 5% 15%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 40px;
 }
 
-.presentacion__contenido{
+.presentacion__contenido {
     width: 50%;
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 
-
-.presentacion__contenido__titulo{
+.presentacion__contenido__titulo {
     font-size: 2rem;
     font-family: var(--fuente-krona);
+    line-height: 1.4;
 }
 
 .titulo-destaque {
-    color: var(--color-terciaria); ;
+    color: var(--color-terciaria);
 }
 
-.presentacion__contenido__texto{
+.presentacion__contenido__texto {
     font-size: 1.5rem;
     font-family: var(--fuente-montserrat);
+    line-height: 1.6;
 }
 
-.presentacion__enlaces{
+/* ==========================================================================
+   Enlaces / Redes Sociales
+   ========================================================================== */
+.presentacion__enlaces {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -78,38 +91,54 @@ body{
     gap: 32px;
 }
 
-.presentacion__enlaces__subtitulo{
+.presentacion__enlaces__subtitulo {
     font-family: var(--fuente-krona);
     font-weight: 400;
     font-size: 1.5rem;
 }
-.presentacion__enlaces__link{
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      border: 2px solid var(--color-terciaria);
-      width: 50%;
-      text-align: center;
-      border-radius: 8px;
-      font-size: 1.5rem;
-      font-weight: 600;
-      padding: 21.5px 0;
-      text-decoration: none;
-      color: var(--color-secundaria);
-      font-family: var(--fuente-montserrat);
+
+.presentacion__enlaces__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border: 2px solid var(--color-terciaria);
+    width: 50%;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 21.5px 0;
+    text-decoration: none;
+    color: var(--color-secundaria);
+    font-family: var(--fuente-montserrat);
+    transition: background-color 0.3s ease;
 }
 
-.presentacion__enlaces__link:hover{
+.presentacion__enlaces__link:hover {
     background-color: var(--color-hover);
 }
 
-.presentacion__imagen{
-    width: 40%;
+.presentacion__enlaces__link img {
+    width: 32px;
+    height: auto;
+}
+
+/* ==========================================================================
+   Imagen de Perfil (Ajustada para Escritorio)
+   ========================================================================== */
+.presentacion__imagen {
+    width: 350px; /* Tamaño controlado para que no compita con el texto */
+    height: auto;
+    object-fit: cover;
     border-radius: 10px;
 }
 
-.footer{
-    color:var(--color-primaria);
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+    color: var(--color-primaria);
     background-color: var(--color-terciaria);
     padding: 24px;
     text-align: center;
@@ -118,22 +147,36 @@ body{
     font-weight: 400;
 }
 
+/* ==========================================================================
+   Media Queries (Diseño Responsivo para Móviles y Tablets)
+   ========================================================================== */
 @media (max-width: 1200px) {
-
-    .header{
-         padding: 10%;  
-    }
-    .header__menu{
-        justify-content: center;
-    }
-    .presentacion{
-        flex-direction: column-reverse;
-        padding: 5%;
-
-    }
-
-    .presentacion__contenido{
-        width: auto;
+    .header {
+        padding: 5% 0;
     }
     
+    .header__menu {
+        justify-content: center;
+        gap: 40px;
+    }
+    
+    .presentacion {
+        flex-direction: column-reverse; /* Foto arriba, texto abajo */
+        padding: 8% 5%;
+        gap: 48px;
+    }
+
+    .presentacion__contenido {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .presentacion__enlaces__link {
+        width: 80%; /* Más cómodos para pulsar con pantallas táctiles */
+    }
+
+    .presentacion__imagen {
+        width: 60%; /* Se encoge proporcionalmente en pantallas medianas */
+        max-width: 280px; /* Evita que crezca demasiado */
+    }
 }
