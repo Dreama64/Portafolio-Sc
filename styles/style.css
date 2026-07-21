@@ -22,12 +22,12 @@ body {
 }
 
 /* ==========================================================================
-   Header / Navegación (Mejorado)
+   Header / Navegación
    ========================================================================== */
 .header {
-    padding: 2% 15% 0% 15%; /* Alineado horizontalmente con el contenido de abajo */
+    padding: 2% 15% 0% 15%;
     display: flex;
-    justify-content: flex-start; /* Puedes usar space-between si agregas un logo a la izquierda */
+    justify-content: flex-start;
 }
 
 .header__menu {
@@ -45,7 +45,7 @@ body {
     transition: color 0.3s ease;
 }
 
-/* Línea animada sutil debajo de Home y Sobre mí al pasar el mouse */
+/* Línea animada sutil debajo de los enlaces del menú */
 .header__menu__link::after {
     content: '';
     position: absolute;
@@ -103,7 +103,7 @@ body {
 }
 
 /* ==========================================================================
-   Enlaces / Redes Sociales (Efectos Interactivos)
+   Enlaces / Redes Sociales
    ========================================================================== */
 .presentacion__enlaces {
     display: flex;
@@ -134,23 +134,19 @@ body {
     text-decoration: none;
     color: var(--color-secundaria);
     font-family: var(--fuente-montserrat);
-    
-    /* Propiedad clave para que la animación sea fluida */
     transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     cursor: pointer;
 }
 
-/* Efecto al pasar el mouse por encima de los botones */
 .presentacion__enlaces__link:hover {
     background-color: var(--color-hover);
-    border-color: var(--color-secundaria); /* Cambia el contorno a blanco sutilmente */
-    transform: translateY(-3px);          /* Eleva el botón ligeramente hacia arriba */
-    box-shadow: 0px 5px 15px rgba(34, 212, 253, 0.2); /* Crea un leve brillo celeste abajo */
+    border-color: var(--color-secundaria);
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 15px rgba(34, 212, 253, 0.2);
 }
 
-/* Efecto cuando presionas el botón */
 .presentacion__enlaces__link:active {
-    transform: translateY(-1px); /* Da la sensación física de hundimiento al clickear */
+    transform: translateY(-1px);
 }
 
 .presentacion__enlaces__link img {
@@ -170,58 +166,16 @@ body {
 }
 
 /* ==========================================================================
-   Footer
+   Sección de Proyectos GitHub
    ========================================================================== */
-.footer {
-    color: var(--color-primaria);
-    background-color: var(--color-terciaria);
-    padding: 24px;
-    text-align: center;
-    font-family: var(--fuente-krona);
-    font-size: 1.5rem;
-    font-weight: 400;
+.proyectos-pagina {
+    padding-top: 3%;
+    min-height: 75vh;
 }
 
-/* ==========================================================================
-   Media Queries
-   ========================================================================== */
-@media (max-width: 1200px) {
-    .header {
-        padding: 5% 0;
-    }
-    
-    .header__menu {
-        justify-content: center;
-        gap: 40px;
-    }
-    
-    .presentacion {
-        flex-direction: column-reverse;
-        padding: 8% 5%;
-        gap: 48px;
-    }
-
-    .presentacion__contenido {
-        width: 100%;
-        text-align: center;
-    }
-    
-    .presentacion__enlaces__link {
-        width: 80%;
-    }
-
-    .presentacion__imagen {
-        width: 60%;
-        max-width: 280px;
-    }
-}
-
-/* ==========================================================================
-   Sección de Proyectos GitHub (Estilos CSS)
-   ========================================================================== */
 .proyectos {
     padding: 5% 15%;
-    background-color: #0b0b0b; /* Un tono grisáceo casi negro muy sutil para contrastar con el fondo puro */
+    background-color: #0b0b0b;
 }
 
 .proyectos__titulo {
@@ -260,7 +214,7 @@ body {
     font-family: var(--fuente-krona);
     font-size: 1.2rem;
     color: var(--color-terciaria);
-    text-transform: capitalize; /* Convierte guiones o nombres pegados en algo más estético */
+    text-transform: capitalize;
 }
 
 .proyecto__descripcion {
@@ -310,16 +264,111 @@ body {
     text-align: center;
     padding: 40px 0;
 }
-.proyectos-pagina {
-    padding-top: 3%; /* Le da aire entre el menú de arriba y el título de proyectos */
-    min-height: 75vh; /* Asegura que el footer se mantenga abajo si hay pocos repositorios */
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+    color: var(--color-primaria);
+    background-color: var(--color-terciaria);
+    padding: 24px;
+    text-align: center;
+    font-family: var(--fuente-krona);
+    font-size: 1.5rem;
+    font-weight: 400;
 }
-/* Ajuste móvil para la sección de proyectos */
+
+/* ==========================================================================
+   MEDIA QUERIES (Responsivo)
+   ========================================================================== */
+
+/* Tablets y laptops pequeñas */
 @media (max-width: 1200px) {
+    .header {
+        padding: 5% 0;
+    }
+    
+    .header__menu {
+        justify-content: center;
+        gap: 40px;
+    }
+    
+    .presentacion {
+        flex-direction: column-reverse;
+        padding: 8% 5%;
+        gap: 48px;
+    }
+
+    .presentacion__contenido {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .presentacion__enlaces__link {
+        width: 80%;
+    }
+
+    .presentacion__imagen {
+        width: 60%;
+        max-width: 280px;
+    }
+
     .proyectos {
         padding: 8% 5%;
     }
+
     .proyectos__titulo {
         text-align: center;
+    }
+}
+
+/* Celulares (Ajustes específicos para pantallas pequeñas) */
+@media (max-width: 768px) {
+    .header {
+        padding: 6% 2%;
+    }
+
+    .header__menu {
+        justify-content: center;
+        gap: 15px; /* Reduce espacio para que no choque */
+    }
+
+    .header__menu__link {
+        font-size: 0.95rem; /* Achica levemente la fuente */
+        white-space: nowrap; /* EVITA QUE 'SOBRE MÍ' SE PARTA EN DOS RENGLONES */
+    }
+
+    .presentacion {
+        padding: 5% 6%;
+        gap: 25px;
+    }
+
+    .presentacion__contenido__titulo {
+        font-size: 1.25rem; /* Título escalado para pantalla de celular */
+        line-height: 1.4;
+    }
+
+    .presentacion__contenido__texto {
+        font-size: 0.95rem;
+    }
+
+    .presentacion__enlaces__link {
+        width: 100%; /* Botones de red social a todo el ancho del celular */
+        padding: 12px 0;
+        font-size: 1rem;
+    }
+
+    .presentacion__imagen {
+        width: 55%;
+        max-width: 170px; /* Tamaño de foto perfecto para celular */
+    }
+
+    .proyectos__grid {
+        grid-template-columns: 1fr; /* Una sola tarjeta por fila */
+    }
+
+    .footer {
+        font-size: 0.85rem;
+        padding: 16px;
     }
 }
