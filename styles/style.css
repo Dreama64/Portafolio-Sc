@@ -119,10 +119,10 @@ nav a[aria-current] {
 
 .hero {
   display:grid;
-  grid-template-columns:1.45fr 1fr;
-  gap:80px;
+  grid-template-columns:1.6fr 1fr;
+  gap:64px;
   align-items:center;
-  padding:86px 0 72px;
+  padding:40px 0 48px;
 }
 
 .eyebrow {
@@ -231,7 +231,7 @@ p {
 .portrait {
   position:relative;
   width:100%;
-  max-width:420px;
+  max-width:360px;
   min-width:0;
   justify-self:center;
   padding:0 12px 12px 0;
@@ -498,7 +498,7 @@ p {
 
 @media(min-width:1500px) {
   .hero {
-    padding-block:100px;
+    padding-block:48px;
   }
 
 }
@@ -570,7 +570,7 @@ p {
 
   .hero {
     grid-template-columns:1fr;
-    padding:52px 0 40px;
+    padding:28px 0 36px;
     gap:44px;
   }
 
@@ -588,7 +588,7 @@ p {
   }
 
   .portrait {
-    width:min(100%,380px);
+    width:min(100%,320px);
   }
 
   .portrait figcaption {
@@ -681,3 +681,5 @@ p {
   }
 
 }
+
+.project .tags { margin:0 0 24px; }
