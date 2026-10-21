@@ -228,60 +228,50 @@ p {
   margin-left:10px;
 }
 
-.identity-card {
+.portrait {
   position:relative;
+  width:100%;
+  max-width:420px;
   min-width:0;
-  height:430px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:28px;
-  overflow:hidden;
-  border:1px solid #657653;
-  border-radius:80px 12px 12px 12px;
-  background-color:var(--surface);
-  background-image:linear-gradient(#c7ef8009 1px,transparent 1px),linear-gradient(90deg,#c7ef8009 1px,transparent 1px);
-  background-size:32px 32px;
+  justify-self:center;
+  padding:0 12px 12px 0;
+  isolation:isolate;
 }
-.identity-top,.identity-bottom {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  position:relative;
+.portrait::before {
+  content:"";
+  position:absolute;
+  inset:16px 0 0 16px;
+  border:1px solid #728d55;
+  border-radius:90px 12px 12px 12px;
+  z-index:-1;
 }
-.identity-top {
-  padding-left:20px;
-  color:var(--muted);
+.portrait img {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:80px 8px 8px 8px;
+  background:#e9e7e1;
+}
+.portrait figcaption {
+  position:absolute;
+  bottom:32px;
+  left:-12px;
+  max-width:calc(100% - 12px);
+  padding:14px 22px;
+  background:var(--accent);
+  color:var(--bg);
+  border-radius:4px;
+}
+.portrait figcaption span {
+  display:block;
   font-size:10px;
-  letter-spacing:1.6px;
-}
-.identity-code {
-  color:var(--accent);
-  font:20px monospace;
-}
-.identity-initials {
-  align-self:center;
-  color:var(--accent);
-  font-size:clamp(110px,13vw,180px);
-  font-weight:800;
-  line-height:1;
-  letter-spacing:-12px;
-}
-.identity-initials span {
-  color:var(--text);
-}
-.identity-bottom {
-  padding-top:18px;
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  font-size:9px;
   letter-spacing:1px;
 }
-.identity-bottom span:last-child {
-  color:var(--text);
-  letter-spacing:0;
-  font-size:12px;
+.portrait figcaption strong {
+  font-size:18px;
+  font-weight:600;
 }
 
 .tech-strip {
@@ -526,10 +516,6 @@ p {
     letter-spacing:-2px;
   }
 
-  .identity-card {
-    height:380px;
-  }
-
   .cards {
     gap:12px;
   }
@@ -601,17 +587,14 @@ p {
     font-size:19px;
   }
 
-  .identity-card {
+  .portrait {
     width:min(100%,380px);
-    height:300px;
-    padding:24px;
-    justify-self:center;
-    border-radius:60px 12px 12px 12px;
   }
 
-  .identity-initials {
-    font-size:130px;
-    letter-spacing:-9px;
+  .portrait figcaption {
+    left:0;
+    bottom:28px;
+    padding:12px 18px;
   }
 
   .tech-strip {
@@ -693,7 +676,7 @@ p {
 }
 
 @media(forced-colors:active) {
-  .button,.contact,.identity-card {
+  .button,.contact,.portrait figcaption {
     border:1px solid ButtonText;
   }
 
