@@ -17,7 +17,7 @@ Abre `index.html` o sirve esta carpeta con cualquier servidor estático. No hay 
 - Se sustituyó el diseño inicial por una jerarquía visual consistente, con navegación, acciones y contacto en las tres páginas.
 - Se corrigió el HTML de navegación y el enlace genérico de GitHub. Se retiró LinkedIn porque no había un perfil personal verificable. Facebook conserva la URL original.
 - Accesibilidad: enlace de salto, foco visible, navegación actual, un H1 por página, regiones semánticas, imágenes con texto alternativo, estado de carga anunciado y respeto a movimiento reducido.
-- Rendimiento: se retiraron fuentes externas e iconos de redes innecesarios; se mantuvo la foto original (aprox. 65 KB), con dimensiones declaradas. JavaScript diferido y sin bibliotecas de producción.
+- Rendimiento: se retiraron fuentes externas e iconos de redes innecesarios; la portada y el perfil usan un monograma SC hecho con HTML y CSS, sin descargar una fotografía. El archivo original se conserva en assets para poder recuperarlo. JavaScript diferido y sin bibliotecas de producción.
 - SEO: títulos y descripciones por página, idioma español, metadatos Open Graph y favicon local. No se agregó una URL canónica ni sitemap porque no se ha confirmado el dominio de producción.
 - Proyectos: filtro de forks antes de limitar a seis, datos insertados como texto, límite de espera de diez segundos, recuperación manual y proyecto real disponible sin JavaScript o si GitHub falla. Se consulta la primera página de hasta 100 repositorios; el enlace al perfil permite explorar el resto.
 
