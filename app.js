@@ -1,63 +1,57 @@
-// Configuración: Reemplaza con tu usuario exacto de GitHub si es distinto
-const username = 'Dreama64'; 
+'use strict';
+const container = document.getElementById('github-projects');
+const statusMessage = document.getElementById('project-status');
+const retryButton = document.getElementById('retry-projects');
 
-async function getGitHubRepos() {
-    const projectsContainer = document.getElementById('github-projects');
-    
-    try {
-        // Consultamos la API pública de GitHub ordenada por los creados más recientemente
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=created&per_page=6`);
-        
-        if (!response.ok) {
-            throw new Error('No se pudieron cargar los proyectos');
-        }
-        
-        const repos = await response.json();
-        
-        // Limpiamos el mensaje de "Cargando..."
-        projectsContainer.innerHTML = '';
-        
-        // Si no hay repositorios públicos
-        if (repos.length === 0) {
-            projectsContainer.innerHTML = '<p class="cargando">No se encontraron repositorios públicos.</p>';
-            return;
-        }
-
-        // Iteramos sobre los repositorios devueltos y creamos sus tarjetas
-        repos.forEach(repo => {
-            // Ignoramos los forks para mostrar solo tus proyectos propios
-            if (repo.fork) return;
-
-            const card = document.createElement('article');
-            card.className = 'proyecto__tarjeta';
-
-            // Si el proyecto no tiene descripción, ponemos un texto amigable por defecto
-            const descripcion = repo.description ? repo.description : 'Proyecto de desarrollo web sin descripción detallada aún.';
-            
-            // Si tiene un lenguaje principal (ej: React, JavaScript, HTML), lo mostramos
-            const lenguajeTag = repo.language ? `<span class="proyecto__tag">${repo.language}</span>` : '';
-
-            card.innerHTML = `
-                <h3 class="proyecto__nombre">${repo.name}</h3>
-                <p class="proyecto__descripcion">${descripcion}</p>
-                <div class="proyecto__footer-card">
-                    <div class="proyecto__tags">
-                        ${lenguajeTag}
-                    </div>
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="proyecto__link-repo">
-                        Ver Código &rarr;
-                    </a>
-                </div>
-            `;
-            
-            projectsContainer.appendChild(card);
-        });
-
-    } catch (error) {
-        console.error('Error:', error);
-        projectsContainer.innerHTML = '<p class="cargando">Hubo un error al conectar con GitHub. Inténtalo más tarde.</p>';
+function createProject(repo) {
+    const card = document.createElement('article');
+    card.className = 'project';
+    if (repo.language) {
+        const language = document.createElement('span');
+        language.className = 'project-language';
+        language.textContent = repo.language;
+        card.append(language);
     }
+    const title = document.createElement('h3');
+    title.textContent = repo.name;
+    const description = document.createElement('p');
+    description.textContent = repo.description || 'Explora el código y la documentación en GitHub.';
+    const link = document.createElement('a');
+    link.className = 'text-link';
+    link.href = `https://github.com/Dreama64/${encodeURIComponent(repo.name)}`;
+    link.textContent = `Ver repositorio: ${repo.name} ↗`;
+    card.append(title, description, link);
+    return card;
 }
 
-// Ejecutar la función cuando cargue la página
-document.addEventListener('DOMContentLoaded', getGitHubRepos);
+async function loadProjects() {
+    if (!container) return;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    container.setAttribute('aria-busy', 'true');
+    retryButton.hidden = true;
+    statusMessage.textContent = 'Consultando los últimos repositorios de GitHub…';
+    try {
+        const response = await fetch('https://api.github.com/users/Dreama64/repos?sort=updated&per_page=100&type=owner', {signal: controller.signal});
+        if (!response.ok) throw new Error('GitHub no disponible');
+        const repos = await response.json();
+        if (!Array.isArray(repos)) throw new Error('Respuesta inválida');
+        const projects = repos.filter(repo => !repo.fork && typeof repo.name === 'string').slice(0, 6);
+        if (projects.length) {
+            container.replaceChildren(...projects.map(createProject));
+            statusMessage.textContent = `${projects.length} repositorios públicos de Dreama64. Descripciones y lenguajes obtenidos de GitHub.`;
+        } else {
+            statusMessage.textContent = 'GitHub no devolvió repositorios propios. Puedes revisar el código de este portafolio aquí.';
+        }
+    } catch {
+        statusMessage.textContent = 'No fue posible actualizar la lista. Conservamos los proyectos disponibles; también puedes ver todos los repositorios en GitHub.';
+        retryButton.hidden = false;
+    } finally {
+        clearTimeout(timeout);
+        container.setAttribute('aria-busy', 'false');
+    }
+}
+if (container) {
+    retryButton.addEventListener('click', loadProjects);
+    loadProjects();
+}
